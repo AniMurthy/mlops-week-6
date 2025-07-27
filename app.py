@@ -124,3 +124,4 @@ async def predict_species(
     return {
         "predicted_class": prediction
     }
+# Dummy change to trigger workflow
