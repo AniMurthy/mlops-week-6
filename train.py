@@ -4,7 +4,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn import metrics
 import joblib
 import os
-from google.cloud import storage
 import subprocess 
 
 DATA_CSV_PATH = 'iris_1.csv'
