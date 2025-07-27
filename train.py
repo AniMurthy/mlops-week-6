@@ -14,24 +14,24 @@ METRICS_FILENAME = 'metrics.txt'
 MODEL_PATH = os.path.join(ARTIFACTS_DIR, MODEL_FILENAME)
 METRICS_PATH = os.path.join(ARTIFACTS_DIR, METRICS_FILENAME)
 
-GCS_URI = 'gs://iitmbs-mlops-ani-arboreal-harbor-461417-u1-week1/my-models/mlops-demo/'
+# GCS_URI = 'iitmbs-mlops-ani-arboreal-harbor-461417-u1-week1/my-models/mlops-demo'
 
 # GCP_BUCKET_NAME = 'iitmbs-mlops-ani-arboreal-harbor-461417-u1-week1' # e.g., 'my-iris-model-bucket-123'
 # GCP_MODEL_BLOB_NAME = f'my-models/mlops-demo' # Path within the bucket
 # GCP_METRICS_BLOB_NAME = f'{ARTIFACTS_DIR}/{METRICS_FILENAME}'
 
-def upload_to_gcs(local_path, gcs_destination_uri):
-    """Uploads a file to the Google Cloud Storage bucket."""
-    # storage_client = storage.Client()
-    # bucket = storage_client.bucket(bucket_name)
-    # blob = bucket.blob(destination_blob_name)
-    # blob.upload_from_filename(source_file_name)
-    # print(f"File {source_file_name} uploaded to gs://{bucket_name}/{destination_blob_name}")
+# def upload_to_gcs(local_path, gcs_destination_uri):
+#     """Uploads a file to the Google Cloud Storage bucket."""
+#     # storage_client = storage.Client()
+#     # bucket = storage_client.bucket(bucket_name)
+#     # blob = bucket.blob(destination_blob_name)
+#     # blob.upload_from_filename(source_file_name)
+#     # print(f"File {source_file_name} uploaded to gs://{bucket_name}/{destination_blob_name}")
     
-    command = ["gsutil", "cp", local_path, gcs_destination_uri]
-    print(f"Executing command: {' '.join(command)}")
-    result = subprocess.run(command, check=True, capture_output=True, text=True)
-    print(f"Successfully uploaded {local_path} to {gcs_destination_uri} using gsutil.")
+#     command = ["gsutil", "cp", local_path, gcs_destination_uri]
+#     print(f"Executing command: {' '.join(command)}")
+#     result = subprocess.run(command, check=True, capture_output=True, text=True)
+#     print(f"Successfully uploaded {local_path} to {gcs_destination_uri} using gsutil.")
     
 def train_model():
     """
@@ -69,8 +69,8 @@ def train_model():
         f.write(f"Accuracy: {accuracy:.4f}\n")
     print(f"Metrics saved to: {METRICS_PATH}")
     
-    print("\n--- Uploading artifacts to GCS ---")
-    upload_to_gcs(MODEL_PATH,GCS_URI)
+    # print("\n--- Uploading artifacts to GCS ---")
+    # upload_to_gcs(MODEL_PATH,GCS_URI)
 
     
 
