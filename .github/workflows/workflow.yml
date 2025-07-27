@@ -98,7 +98,7 @@ jobs:
         EXTERNAL_IP=""
         for i in {1..12}; do
           sleep 30
-          EXTERNAL_IP=$(kubectl get service iris-api-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null || echo "")
+          EXTERNAL_IP=$(kubectl get service w6-demo-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null || echo "")
           if [ -n "$EXTERNAL_IP" ]; then
             echo "External IP obtained: $EXTERNAL_IP"
             break
