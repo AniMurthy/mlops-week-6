@@ -91,24 +91,3 @@ jobs:
         # echo "Waiting for deployment rollout to complete..."
         # kubectl rollout status Deployment/week6-demo-Deployment --timeout=300s
         # echo "Deployment completed successfully."
-
-    - name: Get Deployed Service IP
-      run: |
-        echo "Waiting for LoadBalancer to get an external IP..."
-        EXTERNAL_IP=""
-        for i in {1..12}; do
-          sleep 30
-          EXTERNAL_IP=$(kubectl get service w6-demo-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}' 2>/dev/null || echo "")
-          if [ -n "$EXTERNAL_IP" ]; then
-            echo "External IP obtained: $EXTERNAL_IP"
-            break
-          fi
-          echo "Attempt $i: Still waiting for external IP..."
-        done
-        
-        if [ -z "$EXTERNAL_IP" ]; then
-          echo "Failed to get external IP after 6 minutes."
-          exit 1
-        fi
-        
-        echo "Deployment successful! Your API is available at: http://$EXTERNAL_IP"
