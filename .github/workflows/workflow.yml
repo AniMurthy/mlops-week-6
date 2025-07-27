@@ -24,16 +24,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Decode GCP service account key
-      run: |
-        echo "Decoding GCP credentials..."
-        echo "${{ secrets.GCP_SA_KEY }}" | gcp-key.json
-        echo "Credentials file created."
-
-    - name: Authenticate with GCP
-      run: |
-        gcloud auth activate-service-account --key-file=gcp-key.json
-        echo "GCP authenticated."
+    - name: Authenticate to GCP
+      id: 'auth' # Assign an ID to this step to refer to its outputs if needed
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
     - name: Run training file
       run: |
@@ -116,10 +111,3 @@ jobs:
         fi
         
         echo "Deployment successful! Your API is available at: http://$EXTERNAL_IP"
-
-    - name: Cleanup credentials
-      if: always()
-      run: |
-        echo "Cleaning up credentials file..."
-        rm -f gcp-key.json
-        echo "Cleanup completed."
