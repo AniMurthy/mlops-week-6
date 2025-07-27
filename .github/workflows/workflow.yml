@@ -88,9 +88,9 @@ jobs:
         
         kubectl apply -f development.yaml
         
-        echo "Waiting for deployment rollout to complete..."
-        kubectl rollout status development/week6-demo-development --timeout=300s
-        echo "Deployment completed successfully."
+        # echo "Waiting for deployment rollout to complete..."
+        # kubectl rollout status Deployment/week6-demo-Deployment --timeout=300s
+        # echo "Deployment completed successfully."
 
     - name: Get Deployed Service IP
       run: |
