@@ -69,7 +69,7 @@ jobs:
         IMAGE_TAG_SHA="${{ env.ARTIFACT_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
         IMAGE_TAG_LATEST="${{ env.ARTIFACT_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:latest"
         
-        docker build -t "$IMAGE_TAG_SHA" -t "$IMAGE_TAG_LATEST" ./api
+        docker build -t "$IMAGE_TAG_SHA" -t "$IMAGE_TAG_LATEST" .
         
         echo "Pushing Docker images..."
         docker push "$IMAGE_TAG_SHA"
@@ -81,15 +81,15 @@ jobs:
     - name: Deploy to GKE
       run: |
         echo "Deploying to GKE..."
-        sed -i "s|image: .*|image: ${{ env.IMAGE_TAG_SHA }}|g" deployment.yaml
+        sed -i "s|image: .*|image: ${{ env.IMAGE_TAG_SHA }}|g" development.yaml
         
-        echo "Applying updated deployment.yaml:"
-        cat deployment.yaml
+        echo "Applying updated development.yaml:"
+        cat development.yaml
         
-        kubectl apply -f deployment.yaml
+        kubectl apply -f development.yaml
         
         echo "Waiting for deployment rollout to complete..."
-        kubectl rollout status deployment/iris-api-deployment --timeout=300s
+        kubectl rollout status development/week6-demo-development --timeout=300s
         echo "Deployment completed successfully."
 
     - name: Get Deployed Service IP
