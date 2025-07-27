@@ -81,12 +81,12 @@ jobs:
     - name: Deploy to GKE
       run: |
         echo "Deploying to GKE..."
-        sed -i "s|image: .*|image: ${{ env.IMAGE_TAG_SHA }}|g" development.yaml
+        sed -i "s|image: .*|image: ${{ env.IMAGE_TAG_SHA }}|g" deployment-file.yaml
         
-        echo "Applying updated development.yaml:"
-        cat development.yaml
+        echo "Applying updated deployment-file.yaml:"
+        cat deployment-file.yaml
         
-        kubectl apply -f development.yaml
+        kubectl apply -f deployment-file.yaml
         
         # echo "Waiting for deployment rollout to complete..."
         # kubectl rollout status Deployment/week6-demo-Deployment --timeout=300s
