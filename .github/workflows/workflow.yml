@@ -34,7 +34,7 @@ jobs:
       run: |
         echo "Running The training file"
         # gcloud storage cp "${{ env.MODEL_BUCKET_URI }}" ./api/model.joblib
-        pip install -r requirments.txt
+        pip install -r requirements.txt
         python train.py
         echo "Model.joblib saved"
 
